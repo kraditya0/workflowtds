@@ -1,0 +1,22 @@
+name: Speed up CI with Caching
+
+on: [push]
+
+jobs:
+  cache-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # This step sets up the cache
+      - name: Setup Cache
+        id: cache-system
+        uses: actions/cache@v4
+        with:
+          path: ~/cache-folder
+          key: cache-672ff1f
+
+      # This is the specific step required by your assignment
+      - name: prime-cache-672ff1f
+        run: echo "Cache hit result is ${{ steps.cache-system.outputs.cache-hit }}"
